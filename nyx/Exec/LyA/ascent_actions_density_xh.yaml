@@ -1,0 +1,14 @@
+--- 
+- 
+  action: add_extracts
+  extracts: 
+    e1: 
+      type: volume
+      params: 
+        field: xh
+        filename: xh_pic
+    e2: 
+      type: volume
+      params: 
+        field: density
+        filename: density_pic
