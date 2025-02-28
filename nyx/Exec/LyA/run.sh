@@ -1,3 +1,9 @@
-rm -r *log* *out* *Back* *plt* *chk* 2>/dev/null
+rm -r Back* 2>/dev/null
 
-nohup ./Nyx3d.gnu.TPROF.MPI.CUDA.ex inputs > run.log 2>&1 &
+rm -r *log* *out*  2>/dev/null
+
+rm -r  *plt* 2>/dev/null
+
+rm -r  *chk* 2>/dev/null
+
+nohup ./Nyx3d.gnu.TPROF.MPI.CUDA.ex ./configs/1 > run.log 2>&1 &
