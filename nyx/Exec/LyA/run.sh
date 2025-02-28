@@ -1,9 +1,15 @@
-rm -r Back* 2>/dev/null
+#!/bin/bash
 
-rm -r *log* *out*  2>/dev/null
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <config_number>"
+    exit 1
+fi
 
-rm -r  *plt* 2>/dev/null
+config=$1
 
-rm -r  *chk* 2>/dev/null
+rm -r Back* *log* 2>/dev/null
+rm -r "$config/" 2>/dev/null
+mkdir "$config"
+nohup ./Nyx3d.gnu.TPROF.MPI.CUDA.ex "./configs/$config" > "$config/run.log" 2>&1 &
 
-nohup ./Nyx3d.gnu.TPROF.MPI.CUDA.ex ./configs/1 > run.log 2>&1 &
+echo "Running with config $config ..."
