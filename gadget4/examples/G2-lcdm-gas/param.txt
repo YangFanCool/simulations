@@ -1,5 +1,5 @@
 %----  Relevant files 
-InitCondFile        /u/vrs/Simulations/ICs/ExampleICs/lcdm_gas_littleendian.dat
+InitCondFile        ./lcdm_gas_littleendian.dat
 OutputDir           ./output
 SnapshotFileBase    snapshot
 OutputListFilename  outputs_lcdm_gas.txt
