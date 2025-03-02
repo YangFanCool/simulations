@@ -1,6 +1,7 @@
 #!/bin/bash
 
-if [ $# -eq 1 ] && [ "$1" == "clean" ]; then
+if [ $# -eq 1 ] && [ "$1" -eq 0 ]; then
+    kill $(ps aux | grep 'Nyx' | awk 'NR==1 {print $2}')
     rm -r Back* *log* 2>/dev/null
     rm -r "1/" "2/" "3/" 2>/dev/null
     echo "Cleanup completed."
@@ -8,13 +9,12 @@ if [ $# -eq 1 ] && [ "$1" == "clean" ]; then
 fi
 
 if [ $# -gt 2 ]; then
-    echo "Usage: $0 <config_number> [cuda_device] or $0 clean"
+    echo "Usage: $0 <config_number> [cuda_device] or $0 0"
     exit 1
 fi
 
 config=$1
 cuda_device=${2:-0}
-
 export CUDA_VISIBLE_DEVICES=$cuda_device
 
 rm -r Back* *log* 2>/dev/null
