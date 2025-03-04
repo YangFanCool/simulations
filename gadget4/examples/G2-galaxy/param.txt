@@ -1,8 +1,8 @@
 %----  Relevant files 
-InitCondFile        /u/vrs/Simulations/ICs/ExampleICs/lcdm_gas_littleendian.dat
+InitCondFile        /u/vrs/Simulations/ICs/ExampleICs/galaxy_littleendian.dat
 OutputDir           ./output
 SnapshotFileBase    snapshot
-OutputListFilename  outputs_lcdm_gas.txt
+OutputListFilename  empty.txt
 
 
 %---- File formats
@@ -17,24 +17,24 @@ CpuTimeBetRestartFile     7200    % in seconds
 MaxMemSize        2300
 
 %---- Caracteristics of run
-TimeBegin           0.090909091     % Begin of the simulation, z=10
-TimeMax	            1.0             % End of the simulation   
+TimeBegin           0.0        % Begin of the simulation
+TimeMax	            3.0        % End of the simulation
 
 %---- Basic code options that set the type of simulation
-ComovingIntegrationOn    1
+ComovingIntegrationOn    0
 
 %---- Cosmological parameters
-Omega0	              0.3
-OmegaLambda           0.7
-OmegaBaryon           0.04
-HubbleParam           0.7
-Hubble                0.1
-BoxSize               50000.0
+Omega0	              0
+OmegaLambda           0
+OmegaBaryon           0
+HubbleParam         1.0
+Hubble                0
+BoxSize               0
 
 %---- Output frequency and output paramaters
-OutputListOn              1
-TimeBetSnapshot           1.8384163   % 5 constant steps in log(a)
-TimeOfFirstSnapshot       0.047619048  % z=20
+OutputListOn              0 
+TimeBetSnapshot           0.5
+TimeOfFirstSnapshot       0.0
 TimeBetStatistics         0.05
 NumFilesPerSnapshot       1
 MaxFilesWithConcurrentIO  1 
@@ -42,14 +42,14 @@ MaxFilesWithConcurrentIO  1
 %---- Accuracy of time integration
 ErrTolIntAccuracy        0.012 
 CourantFac               0.15
-MaxSizeTimestep          0.025
+MaxSizeTimestep          0.01
 MinSizeTimestep          0.0 
 
 %---- Tree algorithm, force accuracy, domain update frequency
 TypeOfOpeningCriterion                1
 ErrTolTheta                           0.5
-ErrTolThetaMax                        1.0
-ErrTolForceAcc                        0.0025
+ErrTolThetaMax                        0.9
+ErrTolForceAcc                        0.005
 TopNodeFactor                         2.5
 
 ActivePartFracForNewDomainDecomp      0.01
@@ -66,14 +66,20 @@ GravityConstantInternal  0
 
 
 %---- Gravitational softening length
-SofteningComovingClass0     600.0
-SofteningMaxPhysClass0      600.0
+SofteningComovingClass0     0
+SofteningComovingClass1     1.0
+SofteningComovingClass2     0.4
+
+SofteningMaxPhysClass0       0
+SofteningMaxPhysClass1       1.0
+SofteningMaxPhysClass2       0.4
 
 SofteningClassOfPartType0    0
-SofteningClassOfPartType1    0
+SofteningClassOfPartType1    1
+SofteningClassOfPartType2    2
 
 
 %----- SPH
 ArtBulkViscConst       1.0
 MinEgySpec             0
-InitGasTemp            1000.0    % in K
+InitGasTemp            0

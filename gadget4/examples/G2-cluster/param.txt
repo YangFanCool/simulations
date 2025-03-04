@@ -1,8 +1,8 @@
 %----  Relevant files 
-InitCondFile        /u/vrs/Simulations/ICs/ExampleICs/lcdm_gas_littleendian.dat
+InitCondFile        /u/vrs/Simulations/ICs/ExampleICs/cluster_littleendian.dat
 OutputDir           ./output
 SnapshotFileBase    snapshot
-OutputListFilename  outputs_lcdm_gas.txt
+OutputListFilename  empty.txt
 
 
 %---- File formats
@@ -17,8 +17,8 @@ CpuTimeBetRestartFile     7200    % in seconds
 MaxMemSize        2300
 
 %---- Caracteristics of run
-TimeBegin           0.090909091     % Begin of the simulation, z=10
-TimeMax	            1.0             % End of the simulation   
+TimeBegin           0.041666666     % Begin of the simulation (z=23)
+TimeMax	            1.0             % End of the simulation   (z=0)
 
 %---- Basic code options that set the type of simulation
 ComovingIntegrationOn    1
@@ -26,13 +26,13 @@ ComovingIntegrationOn    1
 %---- Cosmological parameters
 Omega0	              0.3
 OmegaLambda           0.7
-OmegaBaryon           0.04
+OmegaBaryon           0
 HubbleParam           0.7
 Hubble                0.1
-BoxSize               50000.0
+BoxSize               0
 
 %---- Output frequency and output paramaters
-OutputListOn              1
+OutputListOn              0 
 TimeBetSnapshot           1.8384163   % 5 constant steps in log(a)
 TimeOfFirstSnapshot       0.047619048  % z=20
 TimeBetStatistics         0.05
@@ -49,11 +49,12 @@ MinSizeTimestep          0.0
 TypeOfOpeningCriterion                1
 ErrTolTheta                           0.5
 ErrTolThetaMax                        1.0
-ErrTolForceAcc                        0.0025
+ErrTolForceAcc                        0.005
 TopNodeFactor                         2.5
 
 ActivePartFracForNewDomainDecomp      0.01
- 
+ActivePartFracForPMinsteadOfEwald     0.05
+
 %---- Initial density estimate
 DesNumNgb              64
 MaxNumNgbDeviation     1 
@@ -66,14 +67,23 @@ GravityConstantInternal  0
 
 
 %---- Gravitational softening length
-SofteningComovingClass0     600.0
-SofteningMaxPhysClass0      600.0
+SofteningComovingClass0      0
+SofteningComovingClass1      72.0
+SofteningComovingClass2      180.0
+SofteningComovingClass3      500.0
+
+SofteningMaxPhysClass0       0
+SofteningMaxPhysClass1       12.0
+SofteningMaxPhysClass2       30.0
+SofteningMaxPhysClass3       150.0
 
 SofteningClassOfPartType0    0
-SofteningClassOfPartType1    0
+SofteningClassOfPartType1    1
+SofteningClassOfPartType2    2
+SofteningClassOfPartType3    3
 
 
 %----- SPH
 ArtBulkViscConst       1.0
 MinEgySpec             0
-InitGasTemp            1000.0    % in K
+InitGasTemp            0
