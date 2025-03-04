@@ -1,6 +1,6 @@
 # resolution
 amr.max_level                       = 0
-amr.max_grid_size                   = 32
+amr.max_grid_size                   = 128
 amr.n_cell                          = 256 256 256
 
 # timestep control
@@ -9,16 +9,16 @@ nyx.initial_z                       = 200.0
 nyx.final_z                         = 1.0
 
 # range values
-nyx.small_dens                      = 5.e9
+nyx.small_dens                      = 7.e10
 nyx.small_temp                      = 1.e-2
 amr.density.value_greater           = 3.5e9
 
 # plt files
-amr.plot_files_output               = 0
+amr.plot_files_output               = 1
 amr.plot_file                       = 2/plt
-amr.plot_int                        = 10
-amr.plot_vars                       = ALL
-amr.derive_plot_vars                = ALL
+amr.plot_int                        = 100
+amr.plot_vars                       = density
+amr.derive_plot_vars                = NONE
 
 # chk files
 amr.checkpoint_files_output         = 0
