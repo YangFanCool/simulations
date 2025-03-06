@@ -1,5 +1,5 @@
 
-        InitCondFile                                      /u/vrs/Simulations/ICs/ExampleICs/sb_64.dat
+        InitCondFile                                      ./sb_64.dat
         OutputDir                                         ./output
         SnapshotFileBase                                  snap
 
@@ -16,7 +16,7 @@
 
         NumFilesPerSnapshot                               1
 
-        TimeBegin                                         0.047619
+        TimeBegin                                         0.9
         TimeMax                                           1
 
         Omega0                                            1.0
