@@ -14,6 +14,7 @@ export CUDA_VISIBLE_DEVICES=$cuda_device
 
 rm -r "$config/" 2>/dev/null
 mkdir "$config"
+cp "./configs/$config" "./$config/params"
 nohup ./Nyx3d.gnu.TPROF.MPI.CUDA.ex "./configs/$config" > "$config/run.log" 2>&1 &
 
 echo "Running with config $config on CUDA device $cuda_device ..."

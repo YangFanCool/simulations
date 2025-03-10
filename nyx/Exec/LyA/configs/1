@@ -1,15 +1,15 @@
 # resolution
 amr.max_level                       = 0
 amr.max_grid_size                   = 128
-amr.n_cell                          = 256 256 256
+amr.n_cell                          = 128 128 128
 
 # timestep control
-max_step                            = 600
-nyx.initial_z                       = 200.0
-nyx.final_z                         = 1.0
+max_step                            = 10000
+nyx.initial_z                       = 500.0
+nyx.final_z                         = 0.0
 
 # range values
-nyx.small_dens                      = 7.e10
+nyx.small_dens                      = 5.162470e1
 nyx.small_temp                      = 1.e-2
 amr.density.value_greater           = 3.5e9
 
@@ -64,7 +64,6 @@ nyx.hi_bc                           = 0   0   0
 nyx.inhomo_reion                    = 0
 nyx.init_sb_vels                    = 1
 nyx.init_shrink                     = 1.0
-nyx.initial_z                       = 100.0
 nyx.lo_bc                           = 0   0   0
 nyx.particle_init_type              = BinaryFile
 nyx.ppm_type                        = 1
