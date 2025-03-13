@@ -1,11 +1,13 @@
+amr.restart                         = /root/autodl-tmp/fan/nyx_128_per_100/chk00500
+max_step                            = 600
+
 # resolution
 amr.max_level                       = 0
 amr.max_grid_size                   = 128
-amr.n_cell                          = 256 256 256
+amr.n_cell                          = 128 128 128
 
 # timestep control
-max_step                            = 10000
-nyx.initial_z                       = 500.0
+nyx.initial_z                       = 1100.0
 nyx.final_z                         = 0.0
 
 # range values
@@ -15,15 +17,15 @@ amr.density.value_greater           = 3.5e9
 
 # plt files
 amr.plot_files_output               = 1
-amr.plot_file                       = 2/plt
-amr.plot_int                        = 100
-amr.plot_vars                       = density
-amr.derive_plot_vars                = NONE
+amr.plot_file                       = /root/autodl-tmp/fan/nyx_128_per_10/plt
+amr.plot_int                        = 10
+amr.plot_vars                       = ALL
+amr.derive_plot_vars                = ALL
 
 # chk files
-amr.checkpoint_files_output         = 0
-amr.check_file                      = 2/chk
-amr.check_int                       = 100
+amr.checkpoint_files_output         = 1
+amr.check_file                      = /root/autodl-tmp/fan/nyx_128_per_10/chk
+amr.check_int                       = 10
 
 # geometry
 geometry.coord_sys                  = 0
