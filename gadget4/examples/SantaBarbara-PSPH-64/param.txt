@@ -16,8 +16,8 @@
 
         NumFilesPerSnapshot                               1
 
-        TimeBegin                                         0.9
-        TimeMax                                           1
+        TimeBegin                                         0.5
+        TimeMax                                           1.0
 
         Omega0                                            1.0
         OmegaLambda                                       0.0
