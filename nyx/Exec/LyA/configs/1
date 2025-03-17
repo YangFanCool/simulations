@@ -4,7 +4,7 @@ amr.max_grid_size                   = 128
 amr.n_cell                          = 128 128 128
 
 # timestep control
-max_step                            = 1500
+max_step                            = 350
 nyx.initial_z                       = 1100.0
 nyx.final_z                         = 0.0
 
@@ -15,14 +15,14 @@ amr.density.value_greater           = 3.5e9
 
 # plt files
 amr.plot_files_output               = 1
-amr.plot_file                       = /root/autodl-tmp/fan/nyx_128_per_100/plt
-amr.plot_int                        = 100
+amr.plot_file                       = /root/autodl-tmp/fan/nyx_128_per_10/plt
+amr.plot_int                        = 10
 amr.plot_vars                       = ALL
 amr.derive_plot_vars                = ALL
 
 # chk files
-amr.checkpoint_files_output         = 1
-amr.check_file                      = /root/autodl-tmp/fan/nyx_128_per_100/chk
+amr.checkpoint_files_output         = 0
+amr.check_file                      = /root/autodl-tmp/fan/nyx_128_per_10/chk
 amr.check_int                       = 100
 
 # geometry
@@ -32,9 +32,9 @@ geometry.prob_hi                    = 28.49002849  28.49002849  28.49002849
 geometry.prob_lo                    = 0 0 0
 
 # key vars
-nyx.comoving_OmB                    = 0.045
-nyx.comoving_OmM                    = 0.27
-nyx.comoving_h                      = 0.71e0
+nyx.comoving_OmB                    = 0.0225
+nyx.comoving_OmM                    = 0.14
+nyx.comoving_h                      = 0.65
 
 # others
 amr.data_log                        = runlog
