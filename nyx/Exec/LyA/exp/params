@@ -1,0 +1,80 @@
+# resolution
+amr.max_level                       = 0
+amr.max_grid_size                   = 128
+amr.n_cell                          = 128 128 128
+
+# timestep control
+nyx.initial_z                       = 1000.0
+nyx.final_z                         = 0.0
+
+# range values
+nyx.small_dens                      = 5.162470e1
+nyx.small_temp                      = 1.e-2
+amr.density.value_greater           = 3.5e9
+
+# plt files
+amr.plot_files_output               = 1
+amr.plot_int                        = 1
+
+# chk files
+amr.checkpoint_files_output         = 0
+amr.check_file                      = ''
+amr.check_int                       = 100
+
+# geometry
+geometry.coord_sys                  = 0
+geometry.is_periodic                = 1 1 1
+geometry.prob_hi                    = 28.49002849  28.49002849  28.49002849
+geometry.prob_lo                    = 0 0 0
+
+# key vars
+nyx.comoving_OmB                    = 0.0225
+nyx.comoving_OmM                    = 0.14
+nyx.comoving_h                      = 0.65
+
+# others
+amr.data_log                        = runlog
+amr.density.field_name              = denvol
+amr.probin_file                     = ""
+amr.refinement_indicators           = density
+amr.v                               = 1
+amrex.regtest_reduction             = 1
+gravity.no_composite                = 1
+gravity.no_sync                     = 1
+gravity.sl_tol                      = 1.e-12
+gravity.v                           = 1
+mg.v                                = 0
+nyx.add_ext_src                     = 0
+nyx.binary_particle_file            = 64sssss_20mpc.nyx
+nyx.cfl                             = 0.9
+nyx.change_max                      = 1.1
+nyx.do_dm_particles                 = 1
+nyx.do_grav                         = 1
+nyx.do_hydro                        = 1
+nyx.do_santa_barbara                = 1
+nyx.dt_cutoff                       = 5.e-20
+nyx.h_species                       = .76
+nyx.he_species                      = .24
+nyx.heat_cool_type                  = 11
+nyx.hi_bc                           = 0   0   0
+nyx.inhomo_reion                    = 0
+nyx.init_sb_vels                    = 1
+nyx.init_shrink                     = 1.0
+nyx.lo_bc                           = 0   0   0
+nyx.particle_init_type              = BinaryFile
+nyx.ppm_type                        = 1
+nyx.relative_max_change_a           = 0.01
+nyx.reuse_mlpoisson                 = 1
+nyx.sdc_split                       = 1
+nyx.strang_split                    = 0
+nyx.sum_interval                    = -1
+nyx.uvb_rates_file                  = "TREECOOL_middle"
+nyx.v                               = 1
+particles.cfl                       = 0.5
+particles.v                         = 1
+
+# new params
+max_step = 3
+amr.plot_file = exp/raw/plt
+amr.plot_vars = density
+amr.derive_plot_vars = pressure magvort x_velocity y_velocity z_velocity
