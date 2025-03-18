@@ -1,114 +1,36 @@
-import yt
-import os
-import glob
 import time
-import shutil
-import subprocess
-yt.set_log_level('WARNING')
+import numpy as np
+from utils.file import re,rm
+from utils.logger import Logger
+from exp import run_exp
 
-config_path = 'sh/base'
-output_dir = 'exp'
-min_step = 1
-max_step = 3
-var_list = ['density']
-derive_list = ['pressure', 'magvort', 'x_velocity', 'y_velocity', 'z_velocity']
-special_config = [
-    f'max_step = {max_step}',
-    f'amr.plot_file = {output_dir}/raw/plt',
-    f'amr.plot_vars = {" ".join(var_list)}',
-    f'amr.derive_plot_vars = {" ".join(derive_list)}',
-]
+'''
+InSituNet
+OmB [0.0215, 0.0235]
+OmM  [0.12, 0.155]
+h [0.55, 0.85]
+'''
+h_range = [0.55, 0.85]
+h_list = np.linspace(h_range[0], h_range[1], 100).tolist()
+h_list = [f"{h:.6f}" for h in h_list][0:9]
 
-def clean():
-    info("Cleaning Started")
-    subprocess.run(['pkill', '-f', 'Nyx'])
-    if os.path.exists(output_dir):
-        shutil.rmtree(output_dir)
-    os.makedirs(output_dir)
-    info("Cleaning Done")
+output_root = '/root/autodl-tmp/nyx'
+re(output_root)
+log_root = f'{output_root}/log'
+re(log_root)
+
+logger = Logger('app',f'{log_root}/app.log')
+logger.print(0, f'exp begin [counts: {len(h_list)}]')
+for index, h in enumerate(h_list):
+    exp_name = f'exp_{index + 1:03d}'
+    logger.print(0, '')
+    logger.print(1, f'Running experiment {exp_name}, h is {h}')
+    tik = time.time()
+    run_exp(log_root, output_root, exp_name, h)
+    logger.print(1, f'Done experiment {exp_name}, time: {(time.time() - tik)/60:.4f} mins')
+    logger.print(0, '')
     pass
+logger.print(0, 'all exp done')
 
-def run_exp():
-    info("Experiment Started")
-    shutil.copy(config_path, f'{output_dir}/params')
-    with open(f'{output_dir}/params', 'a') as params_file:
-        params_file.write('\n\n' + '# new params')
-        for line in special_config:
-            print(f'    {line}')
-            params_file.write('\n' + line)
-    start_time = time.time()
-    with open(f"{output_dir}/run.log", "w") as log_file:
-        process = subprocess.Popen(
-            ["nohup", "./Nyx3d.gnu.TPROF.MPI.CUDA.ex", f'{output_dir}/params'],
-            stdout=log_file,
-            stderr=subprocess.STDOUT,
-            preexec_fn=os.setpgrp
-        )
-        process.wait()
-        pass
-    info(f'Experiment done in {(time.time() - start_time) / 60:.2f} minutes')
-    return
-
-def post_process():
-    info("Transformation Started")
-    start_time = time.time()
-
-    # move files
-    files_to_move = glob.glob('Back*') + glob.glob('*log*')
-    for file_path in files_to_move:
-        shutil.move(file_path, os.path.join(output_dir, os.path.basename(file_path)))
-        print(f'    Moved: {file_path} to {output_dir}/')
-
-    raw_dir = f'{output_dir}/raw'
-    grid_dir = f'{output_dir}/data'
-    if os.path.exists(grid_dir):
-        shutil.rmtree(grid_dir)
-    os.makedirs(grid_dir, exist_ok=True)
-
-    plt_folders = [folder for folder in os.listdir(raw_dir) if folder.startswith('plt')]
-    ds_first = yt.load(os.path.join(raw_dir, plt_folders[0]), hint='amrex')
-    field_name_list = [i[1] for i in ds_first.field_list if i[0] == 'boxlib' and i[1]!='StateErr']
-    timesteps_list = [folder.replace('plt','') for folder in os.listdir(raw_dir) if folder.startswith('plt')]
-    timesteps_list = [time for time in timesteps_list if int(time) >= min_step]
-    timesteps_list.sort(key=lambda x: int(x))
-
-    for field_name in field_name_list:
-        output_folder = os.path.join(grid_dir, field_name)
-        os.makedirs(output_folder, exist_ok=True)
-        pass
-
-    for timestep in timesteps_list:
-        print(f'    curr time: {timestep}')
-        for name in field_name_list:
-            ds = yt.load(os.path.join(raw_dir, f'plt{timestep}'), hint='amrex')
-            data = ds.r[field_name]
-            data_3d = data.reshape((128, 128, 128))
-            data_arr = data_3d.flatten(order='F')
-            data_arr_binarny = data_arr.astype('<f')
-            data_arr_binarny.tofile(f'{grid_dir}/{field_name}/{timestep}.raw',format='<f')
-            pass
-        pass
-
-    # remove raw data
-    shutil.rmtree(raw_dir)
-    shutil.move('sh/app.log', f'{output_dir}/exp.log')
-    info(f'Transformation done in {(time.time() - start_time) / 60:.2f} minutes')
-    pass
-
-def info(message=""):
-    total_length = 100
-    if not message:
-        print('=' * total_length)
-        return
-    message_length = len(message)
-    separator_length = (total_length - message_length - 2) // 2
-    if message_length % 2 == 0:
-        print('=' * separator_length + f' {message} ' + '=' * separator_length)
-    else:
-        print('=' * separator_length + f' {message} ' + '=' * (separator_length + 1))
-
-if __name__ == "__main__":
-    clean()
-    run_exp()
-    post_process()
-    pass
+rm('sh/__pycache__')
+rm('sh/utils/__pycache__')

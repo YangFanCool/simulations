@@ -1,0 +1,1 @@
+nohup python sh/app.py > /dev/null 2>&1 &

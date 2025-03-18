@@ -33,7 +33,6 @@ nyx.comoving_OmM                    = 0.14
 nyx.comoving_h                      = 0.65
 
 # others
-amr.data_log                        = runlog
 amr.density.field_name              = denvol
 amr.probin_file                     = ""
 amr.refinement_indicators           = density
