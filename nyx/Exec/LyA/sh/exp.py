@@ -20,7 +20,7 @@ def run_exp(log_root, output_root, exp_name, h):
 
     config_path = 'sh/base'
     min_step = 150
-    max_step = 350
+    max_step = 250
     var_list = ['density']
     derive_list = ['pressure', 'magvort', 'x_velocity', 'y_velocity', 'z_velocity']
     special_config = [
@@ -42,13 +42,15 @@ def run_exp(log_root, output_root, exp_name, h):
         pass
 
     # run the simulation
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     start_time = time.time()
     with open(f"{output_dir}/run.log", "w") as log_file:
         process = subprocess.Popen(
             ["nohup", "./Nyx3d.gnu.TPROF.MPI.CUDA.ex", f'{output_dir}/params'],
             stdout=log_file,
             stderr=subprocess.STDOUT,
-            preexec_fn=os.setpgrp
+            preexec_fn=os.setpgrp,
+            env=os.environ
         )
         process.wait()
         pass

@@ -10,9 +10,8 @@ OmB [0.0215, 0.0235]
 OmM  [0.12, 0.155]
 h [0.55, 0.85]
 '''
-h_range = [0.55, 0.85]
-h_list = np.linspace(h_range[0], h_range[1], 100).tolist()
-h_list = [f"{h:.6f}" for h in h_list][0:9]
+h_list = np.linspace(0.55, 0.85, 100).tolist()
+h_list = [f"{h:.6f}" for h in h_list][0:29]
 
 output_root = '/root/autodl-tmp/nyx'
 re(output_root)
