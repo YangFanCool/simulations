@@ -21,8 +21,9 @@ def run_exp(log_root, output_root, exp_name, h):
     config_path = 'sh/base'
     min_step = 150
     max_step = 250
-    var_list = ['density']
-    derive_list = ['pressure', 'magvort', 'x_velocity', 'y_velocity', 'z_velocity']
+    var_list = ['NONE']
+    # derive_list = ['pressure', 'magvort', 'x_velocity', 'y_velocity', 'z_velocity']
+    derive_list = ['pressure']
     special_config = [
         f'max_step = {max_step}',
         f'amr.data_log = {output_dir}/data_log.log',

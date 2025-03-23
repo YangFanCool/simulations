@@ -11,9 +11,12 @@ OmM  [0.12, 0.155]
 h [0.55, 0.85]
 '''
 h_list = np.linspace(0.55, 0.85, 100).tolist()
-h_list = [f"{h:.6f}" for h in h_list][0:29]
+h_list = [f"{h:.6f}" for h in h_list]
 
-output_root = '/root/autodl-tmp/nyx'
+# var_list = ['density']
+# # derive_list = ['pressure', 'magvort', 'x_velocity', 'y_velocity', 'z_velocity']
+var = 'pressure'
+output_root = f'/root/autodl-tmp/nyx_{var}'
 re(output_root)
 log_root = f'{output_root}/log'
 re(log_root)
